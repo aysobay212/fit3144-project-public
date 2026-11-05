@@ -5,17 +5,15 @@ from __future__ import annotations
 from qiskit import QuantumCircuit
 from qiskit.quantum_info import DensityMatrix, Statevector
 
-from graph_construction import (
-    build_weighted_graph,
-    maximum_spanning_tree,
-    bron_kerbosch_maximal_cliques,
-    tree_weight,
-)
+from graph_construction import (build_weighted_graph, maximum_spanning_tree, bron_kerbosch_maximal_cliques, tree_weight)
 from quantum_information import pairwise_qmi, von_neumann_entropy
 
 
 def make_example_states():
-    """Return small, known test states as Qiskit DensityMatrix objects."""
+    """
+    "Return small, known test states as Qiskit DensityMatrix objects.
+    """
+    
     # Four-qubit product state |0000>
     product = DensityMatrix(Statevector.from_label("0000"))
 
@@ -25,11 +23,13 @@ def make_example_states():
     bell_circuit.cx(0, 1)
     bell = DensityMatrix(Statevector.from_instruction(bell_circuit))
 
-    # Four-qubit GHZ state: (|0000> + |1111>) / sqrt(2).
+    # Four-qubit GHZ state: (|0000> + |1111>) /root(2).
     ghz_circuit = QuantumCircuit(4)
     ghz_circuit.h(0)
+    
     for q in range(1, 4):
         ghz_circuit.cx(0, q)
+        
     ghz = DensityMatrix(Statevector.from_instruction(ghz_circuit))
 
     return {
@@ -40,6 +40,9 @@ def make_example_states():
 
 
 def print_graph(graph):
+    """
+    Outputs the graph
+    """
     for i, j, data in sorted(graph.edges(data=True)):
         print(f"  ({i}, {j}): {data['weight']:.6f}")
 
