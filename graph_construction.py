@@ -8,7 +8,10 @@ from quantum_information import as_density_matrix, number_of_qubits
 
 
 def build_weighted_graph(rho, method: str = "qmi"):
-    """Build a complete weighted graph using the selected edge-weight method."""
+    """
+    Build a complete weighted graph using the selected edge-weight method.
+    """
+    
     if method not in WEIGHT_METHODS:
         valid = ", ".join(WEIGHT_METHODS)
         raise ValueError(f"Unknown method {method!r}. Choose one of: {valid}.")
@@ -27,17 +30,22 @@ def build_weighted_graph(rho, method: str = "qmi"):
 
 
 def maximum_spanning_tree(graph: nx.Graph) -> nx.Graph:
-    """Return a maximum spanning tree of a connected weighted graph."""
+    """
+    Return a maximum spanning tree of a connected weighted graph.
+    """
+    
     if graph.number_of_nodes() == 0:
         raise ValueError("Cannot construct a spanning tree of an empty graph.")
+        
     if not nx.is_connected(graph):
         raise ValueError("The input graph must be connected.")
-    return nx.maximum_spanning_tree(graph, weight="weight", algorithm="kruskal")
+        
+    return nx.maximum_spanning_tree(graph, weight="weight", algorithm="kruskal") # Kruskal is the default, this can be changed
 
 
 def bron_kerbosch_maximal_cliques(graph: nx.Graph) -> list[list[int]]:
     """
-    Find maximal cliques using the Bron–Kerbosch algorithm with pivoting.
+    Find maximal cliques using the Bron–Kerbosch algorithm with pivoting (refer to pseudo-code)
 
     Returns a list of sorted vertex lists. The order of cliques is not guaranteed.
     """
