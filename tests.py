@@ -5,17 +5,10 @@ import numpy as np
 from qiskit import QuantumCircuit
 from qiskit.quantum_info import DensityMatrix, Statevector
 
-from quantum_information import (
-    pairwise_qmi,
-    reduced_density_matrix,
-    von_neumann_entropy,
-)
+from quantum_information import (pairwise_qmi, reduced_density_matrix, von_neumann_entropy)
 from edge_weights import dimensionality_weight
-from graph_construction import (
-    build_weighted_graph,
-    maximum_spanning_tree,
-    bron_kerbosch_maximal_cliques,
-)
+from graph_construction import (build_weighted_graph, maximum_spanning_tree, bron_kerbosch_maximal_cliques)
+
 
 
 def product_state():
